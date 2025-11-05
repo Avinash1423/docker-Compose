@@ -1,0 +1,16 @@
+
+
+services:
+  backend:
+    build: ./backEnd/demo
+    container_name: demo-backend
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontEnd/front/app
+    container_name: demo-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
