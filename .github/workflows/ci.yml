@@ -20,12 +20,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: frontEnd/front/app/package-lock.json
+          cache-dependency-path: ./frontEnd/front/app/package-lock.json
+
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
@@ -47,4 +49,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B package  
+        run: mvn -B package
