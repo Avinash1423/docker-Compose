@@ -14,6 +14,10 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x]
 
+    defaults:
+      run:
+        working-directory: ./frontEnd/front/app   
+
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
@@ -21,18 +25,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: | 
-          cd frontEnd
-          npm ci
-      - run: |
-          cd frontEnd
-          npm run build --if-present
-      - run: | 
-          cd frontEnd
-          npm test
+          cache-dependency-path: frontEnd/front/app/package-lock.json
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
 
   build-backend:
+    needs: build-frontend
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./backEnd/demo
 
     steps:
       - uses: actions/checkout@v4
@@ -43,6 +47,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: |
-          cd backEnd
-          mvn -B package --file pom.xml
+        run: mvn -B package --file pom.xml
