@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  IMAGE_REGISTRY: "docker.io"
+  FOO_IMAGE_NAME: ${{ github.repository }}/foo
+  FOO_IMAGE_VERSION: "v2"    
+
 jobs:
   build-frontend:
     runs-on: ubuntu-latest
@@ -58,18 +63,14 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Log into registry 
+      - name: Log into registry ${{ env.IMAGE_REGISTRY }}
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
         with:
-          registry: docker.io
+          registry: ${{ env.IMAGE_REGISTRY }}
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: publish
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/fullstack-latest 
         uses: 0x4r45h/docker-compose-ci@v0.1.0
 
  
