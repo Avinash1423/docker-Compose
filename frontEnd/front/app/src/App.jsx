@@ -9,7 +9,7 @@ function App() {
   const submitFunction= async(e)=>{
       e.preventDefault();
 
-      const num=await fetch(`http://localhost:8080/backEnd/api/${number}`);
+      const num=await fetch(`http://13.60.37.124:8080/backEnd/api/${number}`);
       const data=await num.text();
       setOutput(data);
 
