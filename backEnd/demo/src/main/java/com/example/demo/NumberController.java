@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class NumberController {
 
 
-    @GetMapping("backEnd/api/{input}")
+    @GetMapping("avinash-ec2-instance.duckdns.org/api/{input}")
     @ResponseBody
     public int numbers(@PathVariable int input){
 
