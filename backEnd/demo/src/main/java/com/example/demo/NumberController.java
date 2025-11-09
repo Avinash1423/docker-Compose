@@ -14,5 +14,6 @@ public class NumberController {
 
        return input*100;
 
+
     }
 }
