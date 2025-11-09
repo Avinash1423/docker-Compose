@@ -4,11 +4,11 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@CrossOrigin(origins = "http://13.60.37.124")
+@CrossOrigin(origins = "https://avinash-ec2-instance.duckdns.org/")//doesnt make a differenc ehandles by nginx 
 public class NumberController {
 
 
-    @GetMapping("avinash-ec2-instance.duckdns.org/api/{input}")
+    @GetMapping("/api/{input}")
     @ResponseBody
     public int numbers(@PathVariable int input){
 
