@@ -70,5 +70,25 @@ jobs:
 
       - name: publish
         uses: 0x4r45h/docker-compose-ci@v0.1.0
+  
+  deploy:
+    needs: [build-frontend, build-backend, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/docker-Compose
+            git pull origin master
+            docker compose down
+            docker compose pull
+            docker compose up -d
+            
  
