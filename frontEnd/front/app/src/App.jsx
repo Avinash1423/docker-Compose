@@ -9,7 +9,7 @@ function App() {
   const submitFunction= async(e)=>{
       e.preventDefault();
 
-      const num=await fetch(`${number}`);
+      const num=await fetch(`/api/${number}`);
       const data=await num.text();
       setOutput(data);
 
