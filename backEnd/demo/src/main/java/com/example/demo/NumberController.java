@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class NumberController {
 
 
-    @GetMapping("/api/{input}")
+    @GetMapping("/{input}")
     @ResponseBody
     public int numbers(@PathVariable int input){
 
