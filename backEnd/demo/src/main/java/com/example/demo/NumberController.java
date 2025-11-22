@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@CrossOrigin(origins = "/")//doesnt make a differenc ehandles by nginx 
+@CrossOrigin(origins = "https://avinash-ec2-instance.duckdns.org")//doesnt make a differenc ehandles by nginx 
 public class NumberController {
 
 
